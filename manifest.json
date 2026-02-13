@@ -1,6 +1,6 @@
 {
   "name": "Image Display",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "sdkVersion": "2.0",
   "description": "Displays an image as a fullscreen background layer",
   "author": "MyWallpaper",
@@ -8,7 +8,12 @@
   "settings": {
     "wallpaperImage": {
       "type": "image",
-      "label": "Wallpaper Image"
+      "label": "Upload Image"
+    },
+    "imageUrl": {
+      "type": "text",
+      "label": "Or paste image URL",
+      "default": ""
     }
   },
   "permissions": {
