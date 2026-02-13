@@ -1,18 +1,18 @@
-import { jsx as o } from "react/jsx-runtime";
-import { useSettings as a, useFiles as p } from "@mywallpaper/sdk-react";
-import { useState as f, useEffect as m } from "react";
-function F() {
-  const e = a(), { request: t, isFileReference: l } = p(), [r, n] = f(null);
-  m(() => {
-    l(e.wallpaperImage) && t("wallpaperImage").then((s) => {
-      s && n(s);
+import { jsx as a } from "react/jsx-runtime";
+import { useSettings as n, useFiles as p } from "@mywallpaper/sdk-react";
+import { useState as c, useEffect as u } from "react";
+function y() {
+  const e = n(), { request: t, isFileReference: l } = p(), [i, o] = c(null);
+  u(() => {
+    e.sourceType === "local" && l(e.wallpaperImage) && t("wallpaperImage").then((s) => {
+      s && o(s);
     });
-  }, [e.wallpaperImage, t, l]);
-  const i = r || e.imageUrl || null;
-  return i ? /* @__PURE__ */ o(
+  }, [e.sourceType, e.wallpaperImage, t, l]);
+  const r = e.sourceType === "url" ? e.imageUrl : i;
+  return r ? /* @__PURE__ */ a(
     "img",
     {
-      src: i,
+      src: r,
       alt: "",
       style: {
         width: "100%",
@@ -25,5 +25,5 @@ function F() {
   ) : null;
 }
 export {
-  F as default
+  y as default
 };

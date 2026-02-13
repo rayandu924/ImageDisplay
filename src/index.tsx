@@ -2,6 +2,7 @@ import { useSettings, useFiles } from '@mywallpaper/sdk-react'
 import { useState, useEffect } from 'react'
 
 interface Settings {
+  sourceType: 'local' | 'url'
   wallpaperImage: unknown
   imageUrl: string
 }
@@ -12,15 +13,14 @@ export default function ImageDisplay() {
   const [fileBlobUrl, setFileBlobUrl] = useState<string | null>(null)
 
   useEffect(() => {
-    if (isFileReference(settings.wallpaperImage)) {
+    if (settings.sourceType === 'local' && isFileReference(settings.wallpaperImage)) {
       requestFile('wallpaperImage').then((url) => {
         if (url) setFileBlobUrl(url)
       })
     }
-  }, [settings.wallpaperImage, requestFile, isFileReference])
+  }, [settings.sourceType, settings.wallpaperImage, requestFile, isFileReference])
 
-  // Prefer uploaded file, fall back to URL
-  const src = fileBlobUrl || settings.imageUrl || null
+  const src = settings.sourceType === 'url' ? settings.imageUrl : fileBlobUrl
 
   if (!src) return null
 
